@@ -14,14 +14,8 @@ import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 
 export const Interface = () => {
-  const {
-    points,
-    setPoints,
-    selected,
-    setSelect,
-    handleUpdateClick,
-    isUpdateClick,
-  } = useContext(ConfiguratorContext);
+  const { selected, setSelect, handleUpdateClick } =
+    useContext(ConfiguratorContext);
   useEffect(() => {
     console.log(selected);
   }, [selected]);

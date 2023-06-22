@@ -1,10 +1,16 @@
-import { MeshReflectorMaterial, OrbitControls, Stage } from '@react-three/drei';
+import {
+  Html,
+  Text,
+  Float,
+  MeshReflectorMaterial,
+  OrbitControls,
+  Stage,
+} from '@react-three/drei';
 import Femur from './Femur.jsx';
 import Tibia from './Tibia.jsx';
 import React, { useRef } from 'react';
 import Cable from './Cable.jsx';
 import { ConfiguratorContext } from './Configurator';
-import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 
 export default function Experience() {
@@ -16,8 +22,8 @@ export default function Experience() {
   const point6 = useRef();
   const point7 = useRef();
   const point8 = useRef();
-  const point9 = useRef();
-  const point10 = useRef();
+  const femur = useRef();
+  const tibia = useRef();
   const connections = {
     'Femur Center': point1,
     'Hip Center': point2,
@@ -69,8 +75,8 @@ export default function Experience() {
         shadowBias={-0.0015}
         adjustCamera={2}
       >
-        <Femur />
-        <Tibia />
+        <Femur ref={femur} />
+        <Tibia ref={tibia} />
       </Stage>
       {isUpdateClick &&
         Object.entries(points).map((val) => {
@@ -82,6 +88,14 @@ export default function Experience() {
             >
               <sphereGeometry args={[0.05, 16, 16]} />
               <meshStandardMaterial color="blue" transparent />
+              <Html
+                wrapperClass="label"
+                center
+                distanceFactor={8}
+                occlude={[femur, tibia]}
+              >
+                {val[0]}
+              </Html>
             </mesh>
           );
         })}
@@ -104,6 +118,18 @@ export default function Experience() {
           metalness={0.5}
         />
       </mesh>
+      <Float>
+        <Text
+          font="./bangers-v20-latin-regular.woff"
+          fontSize={2}
+          color="salmon"
+          position-y={15}
+          maxWidth={4}
+          textAlign="justify"
+        >
+          Knee PreOp Planning
+        </Text>
+      </Float>
     </>
   );
 }

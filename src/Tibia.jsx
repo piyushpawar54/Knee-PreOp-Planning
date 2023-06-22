@@ -1,8 +1,7 @@
-import { Environment, useGLTF } from '@react-three/drei';
-import { button, useControls } from 'leva';
+import { useGLTF } from '@react-three/drei';
+import { useControls } from 'leva';
 import { useRef } from 'react';
-import { TransformControls, OrbitControls } from '@react-three/drei';
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 import { ConfiguratorContext } from './Configurator';
 export default function Tibia() {
   const ref1 = useRef();

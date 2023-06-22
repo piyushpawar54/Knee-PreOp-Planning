@@ -1,9 +1,8 @@
-import { Environment, useGLTF } from '@react-three/drei';
-import { button, useControls } from 'leva';
-import { TransformControls, OrbitControls } from '@react-three/drei';
+import { useGLTF } from '@react-three/drei';
+import { useControls } from 'leva';
 import { useRef } from 'react';
 import { ConfiguratorContext } from './Configurator';
-import { useEffect, useState, useContext } from 'react';
+import { useContext } from 'react';
 
 export default function Femur() {
   const ref = useRef();

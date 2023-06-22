@@ -26,6 +26,27 @@ body,
   -webkit-backdrop-filter: blur(10px);
 }
 /*   background: rgb(223, 137, 56);*/
+.button > div {
+  font-family: Helvetica, Arial;
+  position: absolute;
+  color: white;
+  padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 30px;
+  user-select: none;
+}
+.label > div {
+  font-family: Helvetica, Arial;
+  position: absolute;
+  background: #00000088;
+  color: white;
+  padding: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-radius: 30px;
+  user-select: none;
+}
 .configurator {
   position: fixed;
   right: 24px;
