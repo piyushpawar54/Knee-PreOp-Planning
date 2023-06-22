@@ -2,10 +2,15 @@ import { Environment, useGLTF } from '@react-three/drei';
 import { button, useControls } from 'leva';
 import { TransformControls, OrbitControls } from '@react-three/drei';
 import { useRef } from 'react';
+import { ConfiguratorContext } from './Configurator';
+import { useEffect, useState, useContext } from 'react';
 
-export default function Femur({ sendCoordinate }) {
+export default function Femur() {
   const ref = useRef();
   const femur = useGLTF('./Femur.glb');
+
+  const { points, setPoints, selected, setSelect } =
+    useContext(ConfiguratorContext);
   const { position, visible } = useControls('Femur', {
     position: {
       value: { x: -1.0, y: 1.0, z: 0 },
@@ -13,20 +18,13 @@ export default function Femur({ sendCoordinate }) {
       joystick: 'invertY',
     },
     visible: true,
-    myInterval: {
-      min: 0,
-      max: 10,
-      value: [4, 5],
-    },
-    clickMe: button(() => {
-      console.log('ok');
-    }),
   });
 
   const femurEventHandler = (event) => {
     //console.log(event);
     //console.log('point', event.point);
-    sendCoordinate(event.point);
+    const coordinates = { ...points, [selected]: event.point };
+    setPoints(coordinates);
   };
 
   return (

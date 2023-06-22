@@ -2,10 +2,14 @@ import { Environment, useGLTF } from '@react-three/drei';
 import { button, useControls } from 'leva';
 import { useRef } from 'react';
 import { TransformControls, OrbitControls } from '@react-three/drei';
-
+import { useEffect, useState, useContext } from 'react';
+import { ConfiguratorContext } from './Configurator';
 export default function Tibia() {
   const ref1 = useRef();
   const tibia = useGLTF('./Tibia.glb');
+
+  const { points, setPoints, selected, setSelect } =
+    useContext(ConfiguratorContext);
 
   const { position, visible } = useControls('Tibia', {
     position: {
@@ -14,19 +18,19 @@ export default function Tibia() {
       joystick: 'invertY',
     },
     visible: true,
-    myInterval: {
-      min: 0,
-      max: 10,
-      value: [4, 5],
-    },
-    clickMe: button(() => {
-      console.log('ok');
-    }),
   });
+
+  const femurEventHandler = (event) => {
+    //console.log(event);
+    //console.log('point', event.point);
+    const coordinates = { ...points, [selected]: event.point };
+    setPoints(coordinates);
+  };
 
   return (
     <>
       <primitive
+        onClick={femurEventHandler}
         ref={ref1}
         object={tibia.scene}
         scale={0.02}

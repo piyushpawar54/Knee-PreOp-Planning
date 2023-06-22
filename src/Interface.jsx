@@ -1,16 +1,30 @@
 import {
   Box,
+  Button,
   FormControl,
   FormControlLabel,
   FormLabel,
   Radio,
   RadioGroup,
-  Slider,
   Stack,
   Typography,
 } from '@mui/material';
-import { useConfigurator } from './context/Configurator.jsx';
+import { ConfiguratorContext } from './Configurator';
+import { useEffect, useState } from 'react';
+import { useContext } from 'react';
+
 export const Interface = () => {
+  const {
+    points,
+    setPoints,
+    selected,
+    setSelect,
+    handleUpdateClick,
+    isUpdateClick,
+  } = useContext(ConfiguratorContext);
+  useEffect(() => {
+    console.log(selected);
+  }, [selected]);
   return (
     <Box
       sx={{
@@ -27,33 +41,58 @@ export const Interface = () => {
           <FormControl>
             <FormLabel>Create Landmarks</FormLabel>
             <RadioGroup
-              value={0}
+              value={selected}
               onChange={(e) => {
-                console.log('Legs');
+                setSelect(e.target.value);
               }}
             >
-              <FormControlLabel control={<Radio />} label="Femur Center" />
-              <FormControlLabel control={<Radio />} label="Hip Center" />
               <FormControlLabel
+                value="Femur Center"
+                control={<Radio />}
+                label="Femur Center"
+              />
+              <FormControlLabel
+                value="Hip Center"
+                control={<Radio />}
+                label="Hip Center"
+              />
+              <FormControlLabel
+                value="Femur Proximal Canal"
                 control={<Radio />}
                 label="Femur Proximal Canal"
               />
               <FormControlLabel
+                value="Femur Distal Canal"
                 control={<Radio />}
                 label="Femur Distal Canal"
               />
-              <FormControlLabel control={<Radio />} label="Medial Epicondyle" />
               <FormControlLabel
+                value="Medial Epicondyle"
+                control={<Radio />}
+                label="Medial Epicondyle"
+              />
+              <FormControlLabel
+                value="Lateral Epicondyle"
                 control={<Radio />}
                 label="Lateral Epicondyle"
               />
-              <FormControlLabel control={<Radio />} label="Distal Medial Pt" />
-              <FormControlLabel control={<Radio />} label="Distal Lateral Pt" />
               <FormControlLabel
+                value="Distal Medial Pt"
+                control={<Radio />}
+                label="Distal Medial Pt"
+              />
+              <FormControlLabel
+                value="Distal Lateral Pt"
+                control={<Radio />}
+                label="Distal Lateral Pt"
+              />
+              <FormControlLabel
+                value="Posterior Medial Pt"
                 control={<Radio />}
                 label="Posterior Medial Pt"
               />
               <FormControlLabel
+                value="Posterior Lateral Pt"
                 control={<Radio />}
                 label="Posterior Lateral Pt"
               />
@@ -62,20 +101,7 @@ export const Interface = () => {
         </Box>
 
         <Box className="glass" p={3}>
-          <FormControl>
-            <FormLabel>Update Controls</FormLabel>
-            <RadioGroup
-              onChange={(e) => {
-                console.log('Leg Color');
-              }}
-            >
-              <FormControlLabel control={<Radio />} label="Update" />
-              <FormControlLabel control={<Radio />} label="Varus/Valgus" />
-              <FormControlLabel control={<Radio />} label="Flexion/Extension" />
-              <FormControlLabel control={<Radio />} label="Distal Resection" />
-              <FormControlLabel control={<Radio />} label="Resection" />
-            </RadioGroup>
-          </FormControl>
+          <Button onClick={handleUpdateClick}>Update</Button>
         </Box>
       </Stack>
     </Box>
